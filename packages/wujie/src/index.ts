@@ -1,9 +1,9 @@
 import type { Plugin } from 'vite'
 
-export default function wujiePlugin() {
+export default function wujiePlugin(): Plugin[] {
   const wujie: Plugin = {
     name: 'vite-plugin-wujie-share',
-    configResolved(config) {
+    configureServer(config) {
       console.log(config)
     },
   }

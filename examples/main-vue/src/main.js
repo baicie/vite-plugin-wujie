@@ -38,7 +38,10 @@ bus.$on("sub-route-change", (name, path) => {
   }
 });
 
-const degrade = window.localStorage.getItem("degrade") === "true" || !window.Proxy || !window.CustomElementRegistry;
+const degrade =
+  window.localStorage.getItem("degrade") === "true" ||
+  !window.Proxy ||
+  !window.CustomElementRegistry;
 const props = {
   jump: (name) => {
     router.push({ name });
@@ -96,11 +99,19 @@ setupApp({
   attrs,
   exec: true,
   alive: true,
-  plugins: [{ cssExcludes: ["https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"] }],
+  plugins: [
+    {
+      cssExcludes: [
+        "https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
+      ],
+    },
+  ],
   props,
   // 引入了的第三方样式不需要添加credentials
   fetch: (url, options) =>
-    url.includes(hostMap("//localhost:7300/")) ? credentialsFetch(url, options) : window.fetch(url, options),
+    url.includes(hostMap("//localhost:7300/"))
+      ? credentialsFetch(url, options)
+      : window.fetch(url, options),
   degrade,
   ...lifecycles,
 });
